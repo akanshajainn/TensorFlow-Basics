@@ -14,13 +14,13 @@ x = tf.placeholder(tf.float32, [None, 784])
 W = tf.Variable(tf.zeros([784, 10]))
 b = tf.Variable(tf.zeros([10]))
 
-y = tf.nn.softmax(tf.matmul(x, W) + b)
+y = tf.nn.softmax(tf.matmul(x, W) + b) #Predicted output
 
-y_ = tf.placeholder(tf.float32, [None, 10])
+y_ = tf.placeholder(tf.float32, [None, 10]) #Labeled or Known output
 
-cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y), eduction_indices=[1]))
+cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y), eduction_indices=[1])) #Loss
 
-train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)
+train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy) #Learning Here
 
 sess = tf.InteractiveSession()
 
@@ -32,6 +32,6 @@ for _ in range(1000):
 
 correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
 
-accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32)) #accuracy of neural net
 
 print(sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels}))
